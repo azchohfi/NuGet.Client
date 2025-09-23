@@ -202,25 +202,7 @@ namespace NuGet.Commands
             request.RequestedRuntimes.UnionWith(Runtimes);
             request.FallbackRuntimes.UnionWith(FallbackRuntimes);
             request.LockFileVersion = LockFileFormat.Version;
-
-            // Run runtime asset checks for project.json, and for other types if enabled.
-            if (ValidateRuntimeAssets == null)
-            {
-                if (request.ProjectStyle == ProjectStyle.ProjectJson
-                    || request.Project.RestoreMetadata == null)
-                {
-                    request.ValidateRuntimeAssets = request.ProjectStyle == ProjectStyle.ProjectJson;
-                }
-                else
-                {
-                    request.ValidateRuntimeAssets = request.Project.RestoreMetadata.ValidateRuntimeAssets;
-                }
-            }
-            else
-            {
-                request.ValidateRuntimeAssets = ValidateRuntimeAssets.Value;
-            }
-
+            request.ValidateRuntimeAssets = request.Project.RestoreMetadata.ValidateRuntimeAssets;
             request.AllowNoOp = !request.CacheContext.NoCache && AllowNoOp;
             request.HideWarningsAndErrors = HideWarningsAndErrors;
             request.ParentId = ParentId;

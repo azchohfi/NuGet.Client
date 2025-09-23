@@ -341,7 +341,7 @@ namespace NuGet.Build.Tasks
             }
             else if (hasPackageReferenceItems)
             {
-                // If any PackageReferences exist treat it as PackageReference. This has priority over project.json.
+                // If any PackageReferences exist treat it as PackageReference.
                 projectStyle = ProjectStyle.PackageReference;
             }
             else if (ProjectHasPackagesConfigFile(projectDirectory, projectName, out packagesConfigFilePath))

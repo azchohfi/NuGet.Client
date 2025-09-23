@@ -17,7 +17,7 @@ using NuGet.ProjectModel;
 namespace NuGet.Build.Tasks
 {
     /// <summary>
-    /// .NET Core compatible restore task for PackageReference and UWP project.json projects.
+    /// Restore task for PackageReference and packages.config projects
     /// </summary>
     public class RestoreTask : Microsoft.Build.Utilities.Task, ICancelableTask, IDisposable
     {

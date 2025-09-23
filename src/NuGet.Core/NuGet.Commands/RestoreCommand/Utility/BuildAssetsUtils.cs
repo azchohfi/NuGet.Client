@@ -298,7 +298,7 @@ namespace NuGet.Commands
         {
             XDocument doc = null;
 
-            // Always write out netcore props/targets. For project.json only write the file if it has items.
+            // Always write out netcore props/targets.
             if (outputType == ProjectStyle.PackageReference || groups.SelectMany(e => e.Items).Any())
             {
                 doc = GenerateEmptyImportsFile();
@@ -402,6 +402,7 @@ namespace NuGet.Commands
             return result;
         }
 
+        // TODO NK - Combine this and GetMSBuildFilePathForPackageReferenceStyleProject
         public static string GetMSBuildFilePath(PackageSpec project, string extension)
         {
             string path;

@@ -13,9 +13,6 @@ using NuGet.ProjectModel;
 
 namespace NuGet.ProjectManagement
 {
-    /// <summary>
-    /// Utilities for project.json
-    /// </summary>
     public static class BuildIntegratedProjectUtility
     {
         /// <summary>

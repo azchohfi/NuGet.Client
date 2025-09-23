@@ -20,7 +20,7 @@ namespace NuGet.Packaging
         Defaultv2 = Nupkg | Files,
 
         /// <summary>
-        /// Default package save mode for v3 (project.json)-style restore.
+        /// Default package save mode for v3 PackageReference-style restore.
         /// This includes <see cref="Files"/>, <see cref="Nuspec"/>, and <see cref="Nupkg"/>.
         /// </summary>
         Defaultv3 = Nuspec | Nupkg | Files,

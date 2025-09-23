@@ -20,8 +20,7 @@ namespace NuGet.PackageManagement
 {
     /// <summary>
     /// Supporting methods for restoring sets of projects that implement <see cref="IDependencyGraphProject"/>. This
-    /// code is used by Visual Studio to execute restores for solutions that have mixtures of UWP project.json,
-    /// packages.config, and PackageReference-type projects.
+    /// code is used by Visual Studio to execute restores for solutions that have mixtures of packages.config and PackageReference-type projects.
     /// </summary>
     public static class DependencyGraphRestoreUtility
     {

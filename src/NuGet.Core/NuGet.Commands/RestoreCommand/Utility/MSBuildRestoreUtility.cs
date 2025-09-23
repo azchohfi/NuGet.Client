@@ -102,7 +102,6 @@ namespace NuGet.Commands
                 }
 
                 if (spec.RestoreMetadata.ProjectStyle == ProjectStyle.PackageReference
-                    || spec.RestoreMetadata.ProjectStyle == ProjectStyle.ProjectJson
                     || spec.RestoreMetadata.ProjectStyle == ProjectStyle.DotnetCliTool)
                 {
                     validForRestore.Add(spec.RestoreMetadata.ProjectUniqueName);
@@ -174,16 +173,9 @@ namespace NuGet.Commands
 
                 (bool isCentralPackageManagementEnabled, bool isCentralPackageVersionOverrideDisabled, bool isCentralPackageTransitivePinningEnabled, bool isCentralPackageFloatingVersionsEnabled) = GetCentralPackageManagementSettings(specItem, restoreType);
 
-                // Get base spec
-                if (restoreType == ProjectStyle.ProjectJson)
-                {
-                    result = GetProjectJsonSpec(specItem);
-                }
-                else
-                {
-                    // Read msbuild data for PR and related projects
-                    result = GetBaseSpec(specItem, restoreType, items);
-                }
+                // Get base spec            
+                // Read msbuild data for PR and related projects
+                result = GetBaseSpec(specItem, restoreType, items);
 
                 // Applies to all types
                 result.RestoreMetadata.ProjectStyle = restoreType;
@@ -202,7 +194,6 @@ namespace NuGet.Commands
 
                 if (restoreType == ProjectStyle.PackageReference
                     || restoreType == ProjectStyle.DotnetCliTool
-                    || restoreType == ProjectStyle.ProjectJson
                     || restoreType == ProjectStyle.PackagesConfig)
                 {
 
@@ -292,12 +283,6 @@ namespace NuGet.Commands
                     }
                     pcRestoreMetadata.RestoreLockProperties = GetRestoreLockProperties(specItem);
                     pcRestoreMetadata.RestoreAuditProperties = GetRestoreAuditProperties(specItem, items, GetAuditSuppressions(items));
-                }
-
-                if (restoreType == ProjectStyle.ProjectJson)
-                {
-                    // Check runtime assets by default for project.json
-                    result.RestoreMetadata.ValidateRuntimeAssets = true;
                 }
 
                 result.RestoreMetadata.CentralPackageVersionsEnabled = isCentralPackageManagementEnabled;
@@ -889,22 +874,6 @@ namespace NuGet.Commands
             }
 
             return defaultValue;
-        }
-
-        private static PackageSpec GetProjectJsonSpec(IMSBuildItem specItem)
-        {
-            PackageSpec result;
-            var projectPath = specItem.GetProperty("ProjectPath");
-            var projectName = Path.GetFileNameWithoutExtension(projectPath);
-            var projectJsonPath = specItem.GetProperty("ProjectJsonPath");
-
-            // Read project.json
-            result = JsonPackageSpecReader.GetPackageSpec(projectName, projectJsonPath);
-
-            result.RestoreMetadata = new ProjectRestoreMetadata();
-            result.RestoreMetadata.ProjectJsonPath = projectJsonPath;
-            result.RestoreMetadata.ProjectName = projectName;
-            return result;
         }
 
         private static PackageSpec GetBaseSpec(IMSBuildItem specItem, ProjectStyle projectStyle, IEnumerable<IMSBuildItem> items)

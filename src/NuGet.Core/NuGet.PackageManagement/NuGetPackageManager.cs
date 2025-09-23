@@ -3563,7 +3563,7 @@ namespace NuGet.PackageManagement
             if (executionContext != null
                 && executionContext.DirectInstall != null)
             {
-                //packagesPath is different for project.json vs Packages.config scenarios. So check if the project is a build-integrated project
+                //packagesPath is different for PackageReference vs Packages.config scenarios. So check if the project is a build-integrated project
                 var buildIntegratedProject = nuGetProject as BuildIntegratedNuGetProject;
                 var readmeFilePath = string.Empty;
 

@@ -127,8 +127,7 @@ namespace NuGet.Commands
         public int LockFileVersion { get; set; } = LockFileFormat.Version;
 
         /// <summary>
-        /// These Runtime Ids will be added to the graph in addition to the runtimes contained
-        /// in project.json under runtimes.
+        /// These Runtime Ids will be added to the graph in addition to the runtimes specified via RuntimeIdentifier or RuntimeIdentifiers in the project file.
         /// </summary>
         /// <remarks>RIDs are case sensitive.</remarks>
         public ISet<string> RequestedRuntimes { get; } = new SortedSet<string>(StringComparer.Ordinal);

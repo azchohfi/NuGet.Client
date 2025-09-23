@@ -24,7 +24,7 @@ using NuGet.Versioning;
 namespace NuGet.ProjectManagement.Projects
 {
     /// <summary>
-    /// A NuGet integrated MSBuild project.k
+    /// A NuGet integrated MSBuild project
     /// These projects contain a project.json
     /// </summary>
     public class ProjectJsonNuGetProject : BuildIntegratedNuGetProject

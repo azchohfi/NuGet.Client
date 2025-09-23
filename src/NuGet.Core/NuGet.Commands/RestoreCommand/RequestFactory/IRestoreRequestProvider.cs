@@ -16,7 +16,7 @@ namespace NuGet.Commands
         /// <summary>
         /// Create RestoreRequest objects.
         /// </summary>
-        /// <param name="inputPath">Project.json or project file path.</param>
+        /// <param name="inputPath">Project file path.</param>
         /// <param name="restoreContext">Command line arguments.</param>
         /// <returns></returns>
         Task<IReadOnlyList<RestoreSummaryRequest>> CreateRequests(
